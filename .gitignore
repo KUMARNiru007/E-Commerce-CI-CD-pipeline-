@@ -2,3 +2,12 @@ node_modules/
 .env
 client/build/
 npm-debug.log*
+*.pem
+
+*.pem
+.env
+ecr-password.txt
+ecr-token.txt
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
