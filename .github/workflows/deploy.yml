@@ -1,0 +1,64 @@
+name: CI/CD Pipeline — E-Commerce
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  # ── JOB 1: Build and push images to ECR ──────────────
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push backend image
+        run: |
+          docker build -t ${{ secrets.ECR_REGISTRY }}/ecommerce-backend:latest ./backend
+          docker push ${{ secrets.ECR_REGISTRY }}/ecommerce-backend:latest
+
+      - name: Build and push frontend image
+        run: |
+          docker build -t ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:latest ./frontend
+          docker push ${{ secrets.ECR_REGISTRY }}/ecommerce-frontend:latest
+
+  # ── JOB 2: Deploy to EC2 via SSH ─────────────────────
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Login to ECR
+            /snap/bin/aws ecr get-login-password --region us-east-1 > /tmp/ecr.txt
+            cat /tmp/ecr.txt | sudo docker login --username AWS --password-stdin 287190273939.dkr.ecr.us-east-1.amazonaws.com
+
+            # Update ECR secret for Kubernetes
+            sudo kubectl delete secret ecr-secret --ignore-not-found
+            ECR_PASS=$(cat /tmp/ecr.txt)
+            sudo kubectl create secret docker-registry ecr-secret \
+              --docker-server=287190273939.dkr.ecr.us-east-1.amazonaws.com \
+              --docker-username=AWS \
+              --docker-password="$ECR_PASS"
+
+            # Pull latest images and restart pods
+            sudo kubectl rollout restart deployment/frontend
+            sudo kubectl rollout restart deployment/backend
+            sudo kubectl rollout status deployment/frontend
+            sudo kubectl rollout status deployment/backend
