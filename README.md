@@ -1,121 +1,124 @@
-#  E-Commerce Website using MERN Stack.
-A E-Commerce website developed using ReactJS for the frontend, NodeJs for the backend, MongoDB as database.
+# E-Commerce Platform with Automated CI/CD Pipeline (AWS)
+
+This repository demonstrates a full-stack e-commerce application built with the MERN stack (MongoDB, Express.js, React.js, Node.js), fully containerized and deployed using a modern DevOps workflow on AWS. The project highlights best practices in CI/CD, infrastructure as code, and cloud-native deployment.
 
 
-## Table of contents
-* [Prerequisites](#prerequisites)
-* [Requirements](#requirements)
-* [Technologies](#technologies)
-* [Features](#features)
-* [Screenshots](#screenshots)
-* [Contact](#contact)
+
+## Table of Contents
+- [Features](#features)
+- [Technologies](#technologies)
+- [DevOps & CI/CD Pipeline](#devops--cicd-pipeline)
+- [Prerequisites](#prerequisites)
+- [Local Development](#local-development)
+- [Screenshots](#screenshots)
+- [Contact](#contact)
+
+
+
+## Features
+- User authentication (login, signup)
+- Admin product management (add, edit, remove)
+- Shopping cart
+- Responsive UI with React & Redux
+- RESTful API with Node.js & Express
+- MongoDB for data persistence
+- Automated CI/CD pipeline (GitHub Actions)
+- Infrastructure as Code (Terraform)
+- Containerized deployment (Docker, k3s)
+
+
+
+## Technologies
+- **Frontend:** React, Redux, React-Bootstrap, Axios
+- **Backend:** Node.js, Express, Mongoose, JWT
+- **Database:** MongoDB
+- **DevOps:** Docker, Docker Compose, Terraform, GitHub Actions, AWS (ECR, EC2), Kubernetes (k3s)
+
+
+## DevOps & CI/CD Pipeline
+
+This project implements a complete CI/CD pipeline and cloud-native deployment:
+
+1. **Dockerization:** Both frontend and backend are containerized. Local testing is performed with Docker Compose.
+2. **Infrastructure as Code:** AWS resources (ECR, EC2, IAM, networking) are provisioned using Terraform.
+3. **Image Registry:** Docker images are pushed to Amazon ECR (private registry).
+4. **Kubernetes Orchestration:** Deployed on a t3.small EC2 instance running k3s (lightweight Kubernetes).
+5. **CI/CD Automation:** GitHub Actions automates the workflow:
+  - On every push to `main`:
+    - Builds Docker images
+    - Pushes images to ECR
+    - Connects to EC2
+    - Restarts Kubernetes pods
+
+**Result:** Full deployment in minutes with a single git push.
+
+> If you're getting into DevOps, building a project like this is highly recommended.
+
+---
+
+`#DevOps #CICD #Docker #Kubernetes #Terraform #AWS #GitHubActions #CloudComputing`
 
 
 ## Prerequisites
-- Text Editor ([VS Code](https://code.visualstudio.com/download) , [Atom](https://atom.io/), [Brackets](http://brackets.io/), etc.)
-- Node.js and npm - [install here](https://www.npmjs.com/get-npm)
-- MongoDB - [install here](https://docs.mongodb.com/manual/installation/)
+- [VS Code](https://code.visualstudio.com/download) or any text editor
+- [Docker](https://www.docker.com/get-started)
+- [Node.js & npm](https://www.npmjs.com/get-npm)
+- [MongoDB](https://www.mongodb.com/try/download/community) (for local dev)
 
 
-## Requirements
-To run this project, install it locally using npm:
+## Local Development
 
-- git clone git@github.com:suhassalian27/E-Commerce-Website-using-ReactJS-NodeJS.git
-```
-  $ cd E-Commerce-Website-using-ReactJS-NodeJS
-```
-- To Run Backend
-  - open terminal 
-```
-  $ npm install
-  $ npm start
-```
-- To Run Frontend
-  - open new terminal
-```
-  $ cd frontend
-  $ npm install
-  $ npm start
-```
+1. **Clone the repository:**
+  ```sh
+  git clone <your-repo-url>
+  cd E-commerce
+  ```
+2. **Copy environment files:**
+  - Place your `.env` files in the appropriate directories (see backend/ for example).
+3. **Start with Docker Compose:**
+  ```sh
+  docker-compose up --build
+  ```
+  - Frontend: http://localhost:3000
+  - Backend: http://localhost:5000
 
-## Technologies
-Project is created with:
-* HTML5 and CSS3: Semantic Elements, CSS Grid, Flexbox
-* React: Components, Props, Events, Hooks, Router, Axios, React-Bootstrap
-* Redux: Store, Reducers, Actions
-* Node & Express: Web API, Body Parser, File Upload, JWT
-* MongoDB: Mongoose
-* Development: ESLint, Babel, Git, Github,
-* Deployment: 
+> You do NOT need to install Node.js or MongoDB locally—everything runs in containers.
 
-## Features
-List of features ready and TODOs for future development
-* User Login, Signup, User Authentication.
-* Admin Login.
-* Add, Edit, Remove Products. (Only Admin)
-* Add to Cart.
-
-To-do list:
-* Sorting
-* Search
 
 ## Screenshots
 
 ### Home Page
-This is the home page of e-commerce. It shows a list of products. It also uses React-Bootstrap Corousel for corousel.
-
 ![Main](Screenshots/main.png)
 
-________________________________________________________
-
 ### Product Details Page
-When the user clicks on a product it takes you to the product details page.
-
 ![Product Details](Screenshots/product-details.png)
-________________________________________________________
 
 ### Cart
-Shopping Cart is the heart of any e-commerce website. I have created a user-friendly shopping cart using React and Redux.
-
 ![Cart](Screenshots/cart.png)
-________________________________________________________
 
 ### Register
-I have created forms for getting user info and save them in the database.
-
 ![Register](Screenshots/register.png)
-________________________________________________________
 
 ### Sign-In
-Sign in page for user to sign in.
-
 ![SignIn](Screenshots/signin.png)
-________________________________________________________
-
-## Ordering Products
-
-Sign in page for user to sign in.
 
 ### Shipping Screen
 ![Shipping](Screenshots/shipping.png)
-________________________________________________________
+
 ### Payment Screen
 ![Payment](Screenshots/payment.png)
-________________________________________________________
+
 ### Place Order Screen
 ![Place Order](Screenshots/placeorder.png)
-________________________________________________________
 
-### Admin 
-Admin should be able to define products and update the count in stock whenever they like. This page is about managing ECommerce products.
-
-## View Products (admin)
-
+### Admin - View Products
 ![Admin View Products](Screenshots/admin-products.png)
-________________________________________________________
 
-### Add Products (admin)
-
+### Admin - Add Products
 ![Admin Add products](Screenshots/add-product.png)
-________________________________________________________
+
+---
+
+## Contact
+For any queries or contributions, please open an issue or pull request.
 
