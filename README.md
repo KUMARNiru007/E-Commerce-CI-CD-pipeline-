@@ -1,131 +1,121 @@
+#  E-Commerce Website using MERN Stack.
+A E-Commerce website developed using ReactJS for the frontend, NodeJs for the backend, MongoDB as database.
 
 
-# Automated CI/CD Pipeline for a Full-Stack App on AWS
-
-I just built my first automated CI/CD pipeline with AWS and wanted to share how it came together. 😎
-
-## What I Did
-
-- **Dockerized my full-stack app**: Built container images for both frontend and backend, and tested everything locally before moving to the cloud.
-- **Infrastructure as Code with Terraform**: Instead of clicking through the AWS console, I wrote infrastructure as code to provision everything (networking, EC2, IAM, ECR, etc).
-- **Pushed Docker images to Amazon ECR**: Used ECR as a private registry so my server can always pull the latest images.
-- **Deployed on EC2 with k3s (Kubernetes)**: Installed k3s (lightweight Kubernetes) on a t3.small EC2 instance to manage containers and handle auto-restarts.
-- **Automated with GitHub Actions**: Every push to the main branch:
-   - Builds images
-   - Pushes to ECR
-   - Connects to EC2
-   - Restarts Kubernetes pods automatically
-
-⚡ **Result:** Full deployment in minutes with just a git push.
-
-If you're getting into DevOps, I’d recommend building something like this yourself. That’s what made everything click for me.
-
----
-
-## Hashtags
-
-#DevOps #CICD #Docker #Kubernetes #Terraform #AWS #GitHubActions #CloudComputing
+## Table of contents
+* [Prerequisites](#prerequisites)
+* [Requirements](#requirements)
+* [Technologies](#technologies)
+* [Features](#features)
+* [Screenshots](#screenshots)
+* [Contact](#contact)
 
 
-
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Architecture](#architecture)
-- [DevOps & CI/CD Pipeline](#devops--cicd-pipeline)
-- [Technologies Used](#technologies-used)
-- [Getting Started (Local Development)](#getting-started-local-development)
-- [Docker & Compose Usage](#docker--compose-usage)
-- [Features](#features)
-- [Screenshots](#screenshots)
+## Prerequisites
+- Text Editor ([VS Code](https://code.visualstudio.com/download) , [Atom](https://atom.io/), [Brackets](http://brackets.io/), etc.)
+- Node.js and npm - [install here](https://www.npmjs.com/get-npm)
+- MongoDB - [install here](https://docs.mongodb.com/manual/installation/)
 
 
+## Requirements
+To run this project, install it locally using npm:
 
-
-## Project Overview
-This repository contains a sample full-stack application (frontend and backend) that demonstrates a complete DevOps workflow:
-
-- Dockerized services
-- Infrastructure as Code (Terraform)
-- Private container registry (ECR)
-- Kubernetes orchestration (k3s)
-- Automated CI/CD (GitHub Actions)
-
-
-## Architecture
+- git clone git@github.com:suhassalian27/E-Commerce-Website-using-ReactJS-NodeJS.git
 ```
-┌─────────────┐      ┌─────────────┐
-│  Frontend   │<---> │  Backend    │
-└─────────────┘      └─────────────┘
-   │                  │
-   └─────►  Database  ◄───────┘
+  $ cd E-Commerce-Website-using-ReactJS-NodeJS
+```
+- To Run Backend
+  - open terminal 
+```
+  $ npm install
+  $ npm start
+```
+- To Run Frontend
+  - open new terminal
+```
+  $ cd frontend
+  $ npm install
+  $ npm start
 ```
 
-All services are containerized and orchestrated with Kubernetes (k3s) on AWS EC2. Infrastructure is provisioned with Terraform. CI/CD is handled by GitHub Actions.
-
-
-## DevOps & CI/CD Pipeline
-This project demonstrates:
-
-- **Docker**: Containerization of all services
-- **Terraform**: Infrastructure as Code for AWS resources
-- **Amazon ECR**: Private Docker image registry
-- **Kubernetes (k3s)**: Lightweight cluster on EC2 for orchestration
-- **GitHub Actions**: Automated build, push, and deployment pipeline
-
-### Pipeline Flow
-1. **Build**: Build Docker images for frontend and backend
-2. **Push**: Push images to Amazon ECR
-3. **Deploy**: Connect to EC2, update Kubernetes manifests, and restart pods
-4. **Provision**: Use Terraform to create AWS infrastructure
-
-> **Note:** You can adapt the pipeline to your preferred CI/CD platform or cloud provider.
-
-
-
-
-## Getting Started (Local Development)
-
-1. **Clone the repository:**
-   ```sh
-   git clone <your-repo-url>
-   cd <project-folder>
-   ```
-2. **Copy environment files:**
-   - Place your `.env` files in the appropriate directories.
-3. **Start with Docker Compose (optional for local):**
-   ```sh
-   docker-compose up --build
-   ```
-   - Frontend: http://localhost:3000
-   - Backend: http://localhost:5000
-
-> **Tip:** You do NOT need to install Node.js or MongoDB locally—everything runs in containers.
-
-
-
-## Technologies Used
-- **Frontend:** Modern JavaScript framework (e.g., React, Vue, Angular)
-- **Backend:** Node.js/Express or similar
-- **Database:** MongoDB or other
-- **DevOps:** Docker, Docker Compose, Terraform, GitHub Actions, AWS (ECR, EC2), Kubernetes (k3s)
-
-
+## Technologies
+Project is created with:
+* HTML5 and CSS3: Semantic Elements, CSS Grid, Flexbox
+* React: Components, Props, Events, Hooks, Router, Axios, React-Bootstrap
+* Redux: Store, Reducers, Actions
+* Node & Express: Web API, Body Parser, File Upload, JWT
+* MongoDB: Mongoose
+* Development: ESLint, Babel, Git, Github,
+* Deployment: 
 
 ## Features
-- Full-stack app with frontend and backend
-- Containerized deployment (Docker)
-- Infrastructure as Code (Terraform)
-- Private image registry (ECR)
-- Kubernetes orchestration (k3s)
-- Automated CI/CD pipeline (GitHub Actions)
+List of features ready and TODOs for future development
+* User Login, Signup, User Authentication.
+* Admin Login.
+* Add, Edit, Remove Products. (Only Admin)
+* Add to Cart.
 
+To-do list:
+* Sorting
+* Search
 
 ## Screenshots
 
-<!-- Add your screenshots here to showcase the app and pipeline results -->
----
+### Home Page
+This is the home page of e-commerce. It shows a list of products. It also uses React-Bootstrap Corousel for corousel.
 
+![Main](Screenshots/main.png)
 
-## Contact
-For any queries or contributions, please open an issue or pull request.
+________________________________________________________
+
+### Product Details Page
+When the user clicks on a product it takes you to the product details page.
+
+![Product Details](Screenshots/product-details.png)
+________________________________________________________
+
+### Cart
+Shopping Cart is the heart of any e-commerce website. I have created a user-friendly shopping cart using React and Redux.
+
+![Cart](Screenshots/cart.png)
+________________________________________________________
+
+### Register
+I have created forms for getting user info and save them in the database.
+
+![Register](Screenshots/register.png)
+________________________________________________________
+
+### Sign-In
+Sign in page for user to sign in.
+
+![SignIn](Screenshots/signin.png)
+________________________________________________________
+
+## Ordering Products
+
+Sign in page for user to sign in.
+
+### Shipping Screen
+![Shipping](Screenshots/shipping.png)
+________________________________________________________
+### Payment Screen
+![Payment](Screenshots/payment.png)
+________________________________________________________
+### Place Order Screen
+![Place Order](Screenshots/placeorder.png)
+________________________________________________________
+
+### Admin 
+Admin should be able to define products and update the count in stock whenever they like. This page is about managing ECommerce products.
+
+## View Products (admin)
+
+![Admin View Products](Screenshots/admin-products.png)
+________________________________________________________
+
+### Add Products (admin)
+
+![Admin Add products](Screenshots/add-product.png)
+________________________________________________________
 
