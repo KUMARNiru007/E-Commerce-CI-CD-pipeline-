@@ -25,7 +25,7 @@ This repository demonstrates a full-stack e-commerce application built with the 
 - Automated CI/CD pipeline (GitHub Actions)
 - Infrastructure as Code (Terraform)
 - Containerized deployment (Docker, k3s) 
-- start the server
+- Start the server 
 
 
 
