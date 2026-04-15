@@ -22,7 +22,7 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build and push backend image
+      - name: Build and push backend image  
         run: |
           docker build -t ${{ secrets.ECR_REGISTRY }}/ecommerce-backend:latest ./backend
           docker push ${{ secrets.ECR_REGISTRY }}/ecommerce-backend:latest
