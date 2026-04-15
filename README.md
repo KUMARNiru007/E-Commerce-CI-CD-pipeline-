@@ -24,7 +24,8 @@ This repository demonstrates a full-stack e-commerce application built with the 
 - MongoDB for data persistence
 - Automated CI/CD pipeline (GitHub Actions)
 - Infrastructure as Code (Terraform)
-- Containerized deployment (Docker, k3s)
+- Containerized deployment (Docker, k3s) 
+- start the server
 
 
 
