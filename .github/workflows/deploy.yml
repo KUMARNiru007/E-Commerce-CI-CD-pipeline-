@@ -5,7 +5,6 @@ on:
     branches: [ main ]
 
 jobs:
-
   # ── JOB 1: Build and push images to ECR ──────────────
   build-and-push:
     runs-on: ubuntu-latest
@@ -45,20 +44,29 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            # Set kubeconfig (REQUIRED for k3s)
+            export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
             # Login to ECR
             aws ecr get-login-password --region us-east-1 > /tmp/ecr.txt
-            cat /tmp/ecr.txt | sudo docker login --username AWS --password-stdin 287190273939.dkr.ecr.us-east-1.amazonaws.com
+            cat /tmp/ecr.txt | sudo docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
 
-            # Update ECR secret for Kubernetes
+            # Update ECR secret
             sudo kubectl delete secret ecr-secret --ignore-not-found
             ECR_PASS=$(cat /tmp/ecr.txt)
+
             sudo kubectl create secret docker-registry ecr-secret \
-              --docker-server=287190273939.dkr.ecr.us-east-1.amazonaws.com \
+              --docker-server=${{ secrets.ECR_REGISTRY }} \
               --docker-username=AWS \
               --docker-password="$ECR_PASS"
 
-            # Pull latest images and restart pods
-            sudo kubectl rollout restart deployment/frontend
-            sudo kubectl rollout restart deployment/backend
-            sudo kubectl rollout status deployment/frontend
-            sudo kubectl rollout status deployment/backend
+            # Apply Kubernetes manifests (VERY IMPORTANT)
+            sudo kubectl apply -f k8s/
+
+            # Restart deployments safely
+            sudo kubectl rollout restart deployment frontend || true
+            sudo kubectl rollout restart deployment backend || true
+
+            # Check rollout
+            sudo kubectl rollout status deployment frontend
+            sudo kubectl rollout status deployment backend
