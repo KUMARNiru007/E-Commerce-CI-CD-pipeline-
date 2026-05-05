@@ -4,7 +4,7 @@ import { isAuth, isAdmin } from "../util.js";
 
 const router = express.Router();
 
-
+// GET all products
 router.get("/", async (req, res) => {
     const products = await Product.find({});
     res.send(products);
